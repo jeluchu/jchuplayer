@@ -1,2 +1,0 @@
-rootProject.name = "jchuplayer"
-include(":app", "jchuplayer")
