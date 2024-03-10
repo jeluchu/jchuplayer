@@ -42,7 +42,7 @@ android {
 }
 
 group = "com.jeluchu.jchuplayer"
-version = "1.0.0-alpha01"
+version = "1.0.0-alpha04"
 
 dependencies {
     implementation(libs.bundles.androidx)
@@ -50,31 +50,22 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.github.jeluchu"
-            artifactId = "jchuplayer"
-            version = "1.0.0-alpha01"
-
-            pom {
-                withXml {
-                    val dependenciesNode = asNode().appendNode("dependencies")
-                    configurations.getByName("implementation") {
-                        dependencies.forEach {
-                            val dependencyNode = dependenciesNode.appendNode("dependency")
-                            dependencyNode.appendNode("groupId", it.group)
-                            dependencyNode.appendNode("artifactId", it.name)
-                            dependencyNode.appendNode("version", it.version)
-                        }
-                    }
-                }
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                from(components["release"])
+                artifactId = "jchuplayer"
+                version = "1.0.0-alpha04"
             }
         }
+    }
+}
+
+tasks.withType<AbstractArchiveTask> {
+    if(this.name == "releaseSourcesJar" || this.name == "debugSourcesJar") {
+        enabled = false
     }
 }
