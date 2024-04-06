@@ -25,7 +25,7 @@ import com.jeluchu.jchuplayer.core.ui.composables.SimpleButton
 
 @Composable
 fun MainView(
-    onItemClick: (String) -> Unit
+    onItemClick: (MenuOptions) -> Unit
 ) {
     SystemStatusBarColors(
         systemBarsColor = primary,
@@ -38,7 +38,7 @@ fun MainView(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Main(
-    onItemClick: (String) -> Unit
+    onItemClick: (MenuOptions) -> Unit
 ) = ScaffoldListStructure(
     title = "Jchuplayer",
     navIcon = com.jeluchu.jchucomponents.ui.R.drawable.ic_deco_jeluchu,
@@ -67,6 +67,6 @@ fun Main(
                 .background(secondary.copy(.4f)),
             label = option.name,
             color = darkGreen
-        ) { onItemClick(option.id) }
+        ) { onItemClick(option) }
     }
 }

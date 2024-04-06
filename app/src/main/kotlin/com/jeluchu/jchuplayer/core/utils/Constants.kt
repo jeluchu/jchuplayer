@@ -7,7 +7,7 @@ object DestinationsIds {
 }
 
 object NavigationIds {
-    const val mp4Player = "mp4PlayerNav"
+    const val player = "playerNav"
 }
 
 object Names {

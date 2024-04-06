@@ -6,26 +6,29 @@ import com.jeluchu.jchuplayer.core.utils.DestinationsIds
 import com.jeluchu.jchuplayer.core.utils.NavigationIds
 import com.jeluchu.jchuplayer.features.dashboard.MainView
 import com.jeluchu.jchuplayer.video.VideoPlayerView
+import java.net.URLEncoder
 
 fun NavGraphBuilder.dashboardNav(nav: Destinations) {
     composable(Feature.DASHBOARD.nav) {
-        MainView { id ->
-            when (id) {
-                DestinationsIds.mp4Player -> nav.goToSingleMp4()
+        MainView { option ->
+            when (option.id) {
+                DestinationsIds.mp4Player -> nav.goToPlayer(
+                    URLEncoder.encode(option.url, Charsets.UTF_8.toString())
+                )
             }
         }
     }
 }
 
-fun NavGraphBuilder.mp4SingleNav(nav: Destinations) {
+fun NavGraphBuilder.playerNav(nav: Destinations) {
     navigation(
-        startDestination = Feature.MP4_SINGLE_PLAYER.route,
-        route = NavigationIds.mp4Player
+        startDestination = Feature.PLAYER.route,
+        route = NavigationIds.player
     ) {
-        composable(Feature.MP4_SINGLE_PLAYER.nav) {
+        composable(NavItem.ContentPlayer(Feature.PLAYER)) { backStackEntry ->
             VideoPlayerView(
-                title = "Big Buck Bunny",
-                url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                title = "Example Video Test",
+                url = backStackEntry.findArg(NavArgs.ItemLink),
             )
         }
     }
