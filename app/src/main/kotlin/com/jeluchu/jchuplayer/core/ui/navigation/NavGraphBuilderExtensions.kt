@@ -25,7 +25,8 @@ fun NavGraphBuilder.mp4SingleNav(nav: Destinations) {
         composable(Feature.MP4_SINGLE_PLAYER.nav) {
             VideoPlayerView(
                 title = "Big Buck Bunny",
-                url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                url = "https://be2719.rcr22.ams01.cdn112.com/hls2/03/06361/6w9l9bi85l7s_h/master.m3u8?t=PyhdRU0LLCvMkqc679APGG-c7oTXto0DP0DydH6XHyU&s=1724187308&e=10800&f=31914655&srv=53&asn=6147&sp=4000",
+                embedUrl = "https://filemoon.sx/e/181ckmgidim3",
             )
         }
     }
