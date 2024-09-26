@@ -42,6 +42,7 @@ fun VideoPlayerView(
     modifier: Modifier = Modifier,
     url: String,
     title: String,
+    embedUrl: String,
     seekBack: Long = 10000L,
     autoPlay: Boolean = true,
     seekForward: Long = 10000L,
@@ -49,6 +50,7 @@ fun VideoPlayerView(
     showBuffering: ShowBuffering = ShowBuffering.Always
 ) {
     val link by rememberSaveable { mutableStateOf(url) }
+    val embedLink by rememberSaveable { mutableStateOf(embedUrl) }
     val setPlayer by rememberSaveable { mutableStateOf(true) }
     val resize by rememberSaveable { mutableStateOf(resizeMode) }
     val useArtwork by rememberSaveable { mutableStateOf(true) }
@@ -62,6 +64,7 @@ fun VideoPlayerView(
         modifier = modifier,
         url = link,
         title = title,
+        embedUrl = embedLink,
         resizeMode = resize,
         seekBack = seekBack,
         setPlayer = setPlayer,
@@ -80,6 +83,7 @@ internal fun VideoPlayerView(
     modifier: Modifier = Modifier,
     url: String,
     title: String,
+    embedUrl: String,
     seekBack: Long,
     seekForward: Long,
     setPlayer: Boolean,
@@ -93,6 +97,7 @@ internal fun VideoPlayerView(
 ) {
     val player by rememberExoPlayer(
         url = url,
+        embedUrl = embedUrl,
         seekBack = seekBack,
         seekForward = seekForward
     )

@@ -17,11 +17,13 @@ import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import com.jeluchu.jchuplayer.core.cache.VideoPlayerCacheManager
+import com.jeluchu.jchuplayer.core.utils.UserAgent
 
 @OptIn(UnstableApi::class)
 @Composable
 fun rememberExoPlayer(
     url: String,
+    embedUrl: String,
     seekBack: Long,
     seekForward: Long
 ): State<Player?> = rememberManagedPlayer { context ->
@@ -47,7 +49,13 @@ fun rememberExoPlayer(
         .build()
         .apply {
             setMediaSource(
-                if (url.contains("m3u8")) HlsMediaSource.Factory(DefaultHttpDataSource.Factory())
+                if (url.contains(".m3u8")) HlsMediaSource.Factory(DefaultHttpDataSource.Factory()
+                    .setAllowCrossProtocolRedirects(true)
+                    .setDefaultRequestProperties(
+                        mapOf(
+                            "Origin" to embedUrl,
+                            "Referer" to embedUrl,
+                            "User-Agent" to UserAgent.USER_AGENT_DESKTOP)))
                     .createMediaSource(MediaItem.fromUri(url))
                 else ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory())
                     .createMediaSource(MediaItem.fromUri(Uri.parse(url)))
