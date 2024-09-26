@@ -1,6 +1,7 @@
 plugins {
     id("maven-publish")
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
@@ -17,10 +18,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     buildTypes {
@@ -42,7 +39,7 @@ android {
 }
 
 group = "com.jeluchu.jchuplayer"
-version = "1.0.0-alpha04"
+version = "1.0.0-alpha05"
 
 dependencies {
     implementation(libs.bundles.androidx)
@@ -58,7 +55,7 @@ afterEvaluate {
             register<MavenPublication>("release") {
                 from(components["release"])
                 artifactId = "jchuplayer"
-                version = "1.0.0-alpha04"
+                version = "1.0.0-alpha05"
             }
         }
     }

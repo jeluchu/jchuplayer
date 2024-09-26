@@ -9,7 +9,9 @@ class Destinations(private val navController: NavHostController) {
     private fun String.navigate() = navController.navigate(this)
 
     val goToDashboard: () -> Unit = { Feature.DASHBOARD.route.navigate() }
-    val goToSingleMp4: () -> Unit = { Feature.MP4_SINGLE_PLAYER.route.navigate() }
+    val goToPlayer: (String) -> Unit = { url ->
+        navController.navigate(NavItem.ContentPlayer(Feature.PLAYER).createRoute(url))
+    }
 
     val goBack: (from: NavBackStackEntry) -> Unit = { from ->
         if (from.lifecycleIsResumed()) navController.popBackStack()

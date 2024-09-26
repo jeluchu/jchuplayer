@@ -2,7 +2,7 @@ package com.jeluchu.jchuplayer.core.ui.navigation
 
 enum class Feature(val route: String) {
     DASHBOARD("dashboard"),
-    MP4_SINGLE_PLAYER("mp4SinglePlayer"),
+    PLAYER("player"),
 }
 
 val Feature.baseRoute: String
